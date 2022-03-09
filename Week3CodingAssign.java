@@ -1,6 +1,9 @@
+import java.util.Scanner;
 
 public class Week3CodingAssign {
-
+  
+  static Scanner input = new Scanner(System.in);
+  
   public static void main(String[] args) {
 
     // Create an array of int called ages. After first run add another
@@ -56,33 +59,35 @@ public class Week3CodingAssign {
     }
     System.out.println("Sum of name lengths: " + sumOfNameLength);
 
-    // using wordaddtoself method
+    // Write a method that prints out the word concatenated to itself X number of times
     System.out.println("Word add to self method: " + wordAddToSelf("Hello", 3));
 
-    // using fullName method
+    // Write a method that concatenates full name & last name to a full name
     System.out.println("Full name method: " + fullName("Bob", "Smith"));
 
-    // using largeArray method
+    // Write a method that returns True if array is larger than 100. 
     System.out.println("Int array larger than 100: " + largeArray(ages));
 
-    // using averageDouble method
+    //Write a method that returns the average of doubles in the array
     double[] doubles = {1.3, 4.557, 68.098, 3.907, 6.2, 98.67};
     System.out.println("Average of doubles array: " + averageDoubles(doubles));
 
-    // using doubleArrayLarger method
+    // Write a method that returns true if one array is larger than the other
     double[] doublesNumberTwo = {4.5, 98.234, 12.5, 3.1};
     System.out.println("Is double array number one larger than number two: "
         + doubleArrayLarger(doubles, doublesNumberTwo));
 
-    // using willBuyDrink method
+    // Write a method that returns True if it is hot out, and you have more than 10.50 in your pocket. 
     boolean isHotOutside = true;
     double moneyInPocket = 12.50;
     System.out.println("Will you buy a drink today: " + willBuyDrink(isHotOutside, moneyInPocket));
 
-    // Will print out exactly what bills/coins need to be given back from sale.
-    // (total amount of sale, cash given to cashier)
-    changeAtRegister(15.67, 20.00);
-
+    // Create your own method that solves a problem. Created a Create List method that takes input
+    // from the user for 5 strings, returns an array with all the strings.
+    for(String item : createList()) {
+      System.out.println("Name: " + item);
+    }
+   
   }
 
   // Create a method that adds a word to itself x number of times.
@@ -137,105 +142,22 @@ public class Week3CodingAssign {
     return false;
   }
 
-  // This method will take input for total of sale and what cash the customer hands the cashier. It
-  // will print
-  // out the changed need in exactly what dollars and coins. Largest bill expected back is 20.
-  // this solves the problem of waiting for the cashier to think about what bills/coins to be given
-  // back.
-  // I created this because at some point I would like to make my own Point of Sale system and I
-  // thought
-  // this would be a helpful exercise.
-  public static void changeAtRegister(double total, double cashGiven) {
-    // The cash that the customer hands the cashier, and the total of the bill
-    cashGiven = 50.20;
-    total = 32.57;
-
-    // Starts the count of what bills/coins will be need.
-    int twentyDollars = 0;
-    int tenDollars = 0;
-    int fiveDollars = 0;
-    int oneDollars = 0;
-    int quarters = 0;
-    int dimes = 0;
-    int nickels = 0;
-    int pennies = 0;
-
-    // Prints out the change so the customer knows what they are getting back. Also round the change
-    // to the nearest 2 places.
-    double change = cashGiven - total;
-    change = Math.round(change * 100.0) / 100.0;
-    System.out.println("Your change is: $" + change);
-
-
-    // While change is not 0, it will loop through and check for what bills/coins need to be given.
-    // It will add
-    // to each category for bill/coins as it goes and subtract that amount from the change at the
-    // same time
-    // until change is 0 and all bills/coins have been counted to be given back. Rounds to the
-    // nearest 2 decimal places
-    while (change != 0) {
-      change = Math.round(change * 100.0) / 100.0;
-      if ((change % 20 != 0 && change >= 20) || (change % 20 == 0 && change >= 20)) {
-        twentyDollars++;
-        change -= 20;
-
-      } else if ((change % 10 != 0 && change >= 10) || (change % 10 == 0 && change >= 10)) {
-        tenDollars++;
-        change -= 10;
-
-      } else if ((change % 5 != 0 && change >= 5) || (change % 5 == 0 && change >= 5)) {
-        fiveDollars++;
-        change -= 5;
-
-      } else if ((change % 1 != 0 && change >= 1) || (change % 1 == 0 && change >= 1)) {
-        oneDollars++;
-        change -= 1;
-
-      } else if ((change % .25 != 0 && change >= .25) || (change % .25 == 0 && change >= .25)) {
-        quarters++;
-        change -= .25;
-
-      } else if ((change % .10 != 0 && change >= .10) || (change % .10 == 0 && change >= .10)) {
-        dimes++;
-        change -= .10;
-
-      } else if ((change % .05 != 0 && change >= .05) || (change % .05 == 0 && change >= .05)) {
-        nickels++;
-        change -= .05;
-
-      } else if ((change % .01 != 0 && change >= .01) || (change % .01 == 0 && change >= .01)) {
-        pennies++;
-        change -= .01;
-
-      }
+  // This method will take input from the user for 5 times to create an array of names.
+  // I decided to create this to help with needing to make arrays of names or creating
+  // a list of something else, like groceries. 
+   /***
+    * Creates an array of 5 strings inputed from user
+    * @return an array of strings
+    */
+  public static String[] createList() {
+    String[] listOfNames = new String[5];
+    System.out.println("Please enter 5 names: ");
+    for(int index = 0; index < 5; index++ ) {
+      String name = input.next();
+      listOfNames[index] = name;
     }
-
-    // This will check to see what need to be printed, so no 0 amounts or unnecessary bill/coins are
-    // printed out.
-    if (twentyDollars != 0) {
-      System.out.println("Twenty(s): " + twentyDollars);
-    }
-    if (tenDollars != 0) {
-      System.out.println("Ten(s): " + tenDollars);
-    }
-    if (fiveDollars != 0) {
-      System.out.println("Five(s): " + fiveDollars);
-    }
-    if (oneDollars != 0) {
-      System.out.println("One(s): " + oneDollars);
-    }
-    if (quarters != 0) {
-      System.out.println("Quarters: " + quarters);
-    }
-    if (nickels != 0) {
-      System.out.println("Nickels: " + nickels);
-    }
-    if (dimes != 0) {
-      System.out.println("Dimes: " + dimes);
-    }
-    if (pennies != 0) {
-      System.out.println("Pennies: " + pennies);
-    }
+    return listOfNames;
+    
   }
 
 }
